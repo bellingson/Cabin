@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  AboutViewController.h
 //  Cabin
 //
 //  Created by Ben Ellingson on 2/26/14.
@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface AboutViewController : UIViewController
+
+
+- (IBAction)doneButtonTouched:(id)sender;
 
 @end

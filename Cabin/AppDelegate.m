@@ -8,10 +8,28 @@
 
 #import "AppDelegate.h"
 
+#import "DataService.h"
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    NSLog(@"data folder: %@",DATA_FOLDER);
+    NSFileManager *fm = [NSFileManager defaultManager];
+    if ([fm fileExistsAtPath: DATA_FOLDER] == NO) {
+        NSError *error;
+        [fm createDirectoryAtPath: DATA_FOLDER withIntermediateDirectories:YES attributes: nil error: &error];
+        if (error) {
+            NSLog(@"error: %@",error.localizedDescription);
+        }
+        
+    }
+    
+    // initialize singleton
+    [DataService instance];
+    
+    
     // Override point for customization after application launch.
     return YES;
 }
