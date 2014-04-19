@@ -18,7 +18,7 @@
 
 - (IBAction)doneButtonTouched:(id)sender {
 
-    NSLog(@"remove from parent: %@",self.parentViewController);
+    //NSLog(@"remove from parent: %@",self.parentViewController);
     
     //[self removeFromParentViewController];
     [self dismissViewControllerAnimated: YES completion: nil];

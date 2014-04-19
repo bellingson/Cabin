@@ -51,5 +51,18 @@
 }
 
 - (IBAction)trainAgainButtonTouched:(id)sender {
+    
+    [self.delegate testAgain];
+    
 }
+
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
+- (BOOL)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+
 @end

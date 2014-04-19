@@ -12,4 +12,6 @@
 
 - (void) testComplete: (NSArray *) samples;
 
+- (void) testAgain;
+
 @end

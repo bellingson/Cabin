@@ -12,8 +12,15 @@
 
 @interface DataService : NSObject
 
+@property (strong, nonatomic) NSNumber *patientNumber;
+@property (strong, nonatomic) NSDate *startDate;
+
+@property (strong, nonatomic) NSDateFormatter *df;
+
 + (DataService *) instance;
 
 - (BOOL) upload;
+
+- (void) writePatientNumber: (NSNumber *) pNumber;
 
 @end

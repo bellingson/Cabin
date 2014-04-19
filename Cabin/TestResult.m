@@ -9,6 +9,7 @@
 #import "TestResult.h"
 
 #import "NSDictionary+JSON.h"
+#import "DataService.h"
 
 @implementation TestResult
 
@@ -75,8 +76,17 @@
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     df.dateFormat = JSON_DATE_FORMAT;
     
-    return [NSDictionary dictionaryWithObjectsAndKeys: [self samplesAsDictionaryValues], @"samples",
+    DataService *dataService = [DataService instance];
+    UIDevice *device = [UIDevice currentDevice];
+    NSString *appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey: kCFBundleVersionKey];
+    
+    return [NSDictionary dictionaryWithObjectsAndKeys:  dataService.patientNumber, @"patient_number",
+                                                        appVersion, @"app_version",
+                                                        [device name], @"device_name",
+                                                        [device systemVersion], @"ios_version",
+                                                        [self samplesAsDictionaryValues], @"samples",
                                                         [df stringFromDate: self.time],@"time",
+                                                        [self summaryAsDictionaryValues], @"summary",
             nil];
     
 }
@@ -91,9 +101,16 @@
     
     
     return array;
-    
-    
 }
+
+- (NSDictionary *) summaryAsDictionaryValues {
+    return [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithInt: self.countWrong] ,@"count_wrong",
+                                                        [NSNumber numberWithInt: self.countCorrect], @"count_correct",
+                                                        [NSNumber numberWithInt: self.percentAccurate], @"percent_accurate",
+                                                        [NSNumber numberWithDouble: self.averageResponseTime], @"average_response_time",
+                                                        nil];
+}
+
 
 - (NSString *) formatFilePath {
     

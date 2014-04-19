@@ -12,6 +12,7 @@
 #import "TestViewController.h"
 
 #import "TestCompleteViewController.h"
+#import "SettingsViewController.h"
 
 #import "DataService.h"
 

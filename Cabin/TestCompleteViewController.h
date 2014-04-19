@@ -10,6 +10,8 @@
 
 #import "TestResult.h"
 #import "DataService.h"
+#import "TestViewDelegate.h"
+
 
 @interface TestCompleteViewController : UIViewController
 
@@ -23,6 +25,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *sessionsToCompleteLabel;
 
 @property (strong, nonatomic) IBOutlet UILabel *weeksToCompleteLabel;
+
+@property (strong, nonatomic) id<TestViewDelegate> delegate;
 
 
 

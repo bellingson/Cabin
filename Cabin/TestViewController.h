@@ -24,6 +24,10 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *word2;
 
+@property (strong, nonatomic) IBOutlet UIImageView *image1;
+@property (strong, nonatomic) IBOutlet UIImageView *image2;
+
+
 @property (strong, nonatomic) IBOutlet UIImageView *dotButton1;
 @property (strong, nonatomic) IBOutlet UIImageView *dotButton2;
 
@@ -33,10 +37,14 @@
 @property (strong, nonatomic) IBOutlet UIView *wrapperView1;
 @property (strong, nonatomic) IBOutlet UIView *wrapperView2;
 
-@property (strong, nonatomic) IBOutlet UILabel *crossLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *crossLabel;
 
 @property (strong, nonatomic) NSMutableArray *samples;
 @property (strong, nonatomic) TestSample *currentSample;
+
+@property (strong, nonatomic) NSArray *fearFaces;
+@property (strong, nonatomic) NSArray *neutralFaces;
+@property int currentImageIndex;
 
 @property int valueOfState;
 @property int sampleCount;
