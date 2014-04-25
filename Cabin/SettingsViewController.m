@@ -44,7 +44,7 @@
     if ([self validate] == NO)
         return;
     
-     NSNumber *patientNumber = [NSNumber numberWithInt: [self.patientNumberText.text integerValue]];
+     NSNumber *patientNumber = [NSNumber numberWithInt: (int) [self.patientNumberText.text integerValue]];
 
     [self.dataService writePatientNumber: patientNumber];
     

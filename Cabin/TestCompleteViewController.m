@@ -60,9 +60,11 @@
     return NO;
 }
 
-- (BOOL)supportedInterfaceOrientations {
+-  (NSUInteger) supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskPortrait;
 }
+
+
 
 
 @end

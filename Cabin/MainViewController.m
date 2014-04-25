@@ -62,7 +62,7 @@
 
 - (void)testComplete:(NSArray *)samples {
 
-    NSLog(@"test complete with: %d samples",samples.count);
+    NSLog(@"test complete with: %lu samples",(unsigned long)samples.count);
     
     TestResult *result = [[TestResult alloc] initWithSamples: samples];
     

@@ -10,7 +10,7 @@
 
 #import "NSDictionary+JSON.h"
 
-#define DOMAIN @"test.blackrocks.com"
+#define DOMAIN_NAME @"test.blackrocks.com"
 
 
 
@@ -40,7 +40,7 @@ static DataService *svc;
         return YES;
     }
     
-    NSLog(@"results to sync: %d",results.count);
+    NSLog(@"results to sync: %lu",(unsigned long)results.count);
     
     for (TestResult *result in results) {
         [self uploadTestResult: result];
@@ -52,7 +52,7 @@ static DataService *svc;
 
 - (NSURL *) formatUrl: (TestResult *) result {
     
-    NSURL *url = [NSURL URLWithString: [NSString stringWithFormat: @"http://%@/cabin.php",DOMAIN]];
+    NSURL *url = [NSURL URLWithString: [NSString stringWithFormat: @"http://%@/cabin.php",DOMAIN_NAME]];
     
     return url;
     

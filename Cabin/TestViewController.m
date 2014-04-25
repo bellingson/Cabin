@@ -134,7 +134,7 @@
 - (void) checkAnswer: (int) selection {
     
     double sampleStopTime = [NSDate timeIntervalSinceReferenceDate];
-    double time = sampleStopTime - self.sampleStartTime;
+    //double time = sampleStopTime - self.sampleStartTime;
     
     //NSLog(@"time: %f",time);
     
@@ -145,7 +145,7 @@
     UILabel *feedback = selection == 0 ? self.word1 : self.word2;
     
     TestSample *sample = [[TestSample alloc] init];
-    sample.ordinal = samples.count;
+    sample.ordinal = (int) samples.count;
     sample.time = sampleStopTime - self.sampleStartTime;
     [samples addObject: sample];
     
