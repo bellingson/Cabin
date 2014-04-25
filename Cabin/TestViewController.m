@@ -12,7 +12,7 @@
 
 #include <stdlib.h>
 
-#define TEST_SAMPLE_SIZE 200
+#define TEST_SAMPLE_SIZE 4
 
 @interface TestViewController ()
 
