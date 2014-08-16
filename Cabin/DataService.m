@@ -10,7 +10,12 @@
 
 #import "NSDictionary+JSON.h"
 
-#define DOMAIN_NAME @"test.blackrocks.com"
+#import "DateHelper.h"
+
+#import "Base64.h"
+
+
+#define DOMAIN_NAME @"notebook.nmu.edu"
 
 
 
@@ -52,7 +57,10 @@ static DataService *svc;
 
 - (NSURL *) formatUrl: (TestResult *) result {
     
-    NSURL *url = [NSURL URLWithString: [NSString stringWithFormat: @"http://%@/cabin.php",DOMAIN_NAME]];
+    //NSURL *url = [NSURL URLWithString: [NSString stringWithFormat: @"http://%@/cabin.php",DOMAIN_NAME]];
+    //https://notebook.nmu.edu/psychapp/datapost.php
+    
+    NSURL *url = [NSURL URLWithString: [NSString stringWithFormat: @"https://%@/psychapp/datapost.php",DOMAIN_NAME]];
     
     return url;
     
@@ -63,10 +71,13 @@ static DataService *svc;
     NSURL *url = [self formatUrl: result];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [self addAuthorization: request];
     
     [request setHTTPMethod:@"POST"];
     
     NSData *data = [NSData dataWithContentsOfFile: result.filePath];
+    
+   // NSLog(@"POSTING: %@",[[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding]);
     
     [request setHTTPBody: data];
     
@@ -74,7 +85,7 @@ static DataService *svc;
     NSError *err;
     NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
     NSString *responseString = [[NSString alloc] initWithData: responseData encoding: NSUTF8StringEncoding];
-    //NSLog(@"responseData: %@ : %@ : %d", responseString, err, response.statusCode);
+   // NSLog(@"responseData: %@ : %@ : %d", responseString, err, response.statusCode);
 
 
     if (err == nil && response.statusCode == 200) {
@@ -84,6 +95,18 @@ static DataService *svc;
     
     
 }
+
+- (void) addAuthorization: (NSMutableURLRequest *) request {
+    
+    NSString *authStr = [NSString stringWithFormat:@"%@:%@", @"psychdata", @"sycSa3mgba*j=Ti6jyOYMfkWQP3u4JGX" ];
+    NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSString *encodedLoginData = [Base64 encode:[authStr dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSString *authValue = [NSString stringWithFormat:@"Basic %@", encodedLoginData];
+    [request setValue:authValue forHTTPHeaderField:@"Authorization"];
+}
+
 
 - (void) handleUploadComplete: (TestResult *) result {
     
@@ -158,6 +181,54 @@ static DataService *svc;
     [data writeToFile: filePath atomically: YES];
     
 }
+
+- (int) countOfTestsToday {
+    
+    NSArray *tests = [TestResult loadResultsFromFile];
+    
+    NSArray *testsToday = [self testsToday: tests];
+    
+    return (int) testsToday.count;
+}
+
+- (NSArray *) testsToday:(NSArray *) tests {
+    
+    NSMutableArray *r = [[NSMutableArray alloc] init];
+    
+    NSDate *now = [NSDate date];
+    NSDate *startOfDay = [DateHelper startOfDay: now];
+    NSDate *endOfDay = [DateHelper endOfDay: now];
+    
+    for (TestResult *tr in tests) {
+        
+        if ([DateHelper isDate: tr.time after: startOfDay] && [DateHelper isDate: tr.time before: endOfDay]) {
+            [r addObject: tr];
+        }
+    }
+    
+    return r;
+}
+
+- (BOOL) canTakeTest {
+    
+    int testsToday = [self countOfTestsToday];
+    
+    //NSLog(@"tests today: %d",testsToday);
+    
+    if (testsToday >= MAX_TEST_PER_DAY) {
+        
+        NSString *msg = [NSString stringWithFormat: @"You may only take %d tests per day",MAX_TEST_PER_DAY];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Max Tests Completed" message: msg delegate: nil cancelButtonTitle: @"OK" otherButtonTitles: nil];
+        [alert show];
+        
+        return NO;
+    }
+    
+    return YES;
+}
+
+
 
 
 

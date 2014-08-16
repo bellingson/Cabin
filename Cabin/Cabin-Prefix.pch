@@ -19,3 +19,5 @@
 #define DATA_FOLDER [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/data"]
 
 #define JSON_DATE_FORMAT @"yyyy-MM-dd'T'HH:mm:ss"
+
+#define MAX_TEST_PER_DAY 3

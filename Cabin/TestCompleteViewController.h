@@ -28,6 +28,7 @@
 
 @property (strong, nonatomic) id<TestViewDelegate> delegate;
 
+@property (strong, nonatomic) NSArray *tests;
 
 
 

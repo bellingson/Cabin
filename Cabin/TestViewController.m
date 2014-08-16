@@ -9,10 +9,11 @@
 #import "TestViewController.h"
 
 #import "TestCompleteViewController.h"
+#import "DataService.h"
 
 #include <stdlib.h>
 
-#define TEST_SAMPLE_SIZE 4
+#define TEST_SAMPLE_SIZE 1
 
 @interface TestViewController ()
 
@@ -20,34 +21,74 @@
 
 @implementation TestViewController
 
-@synthesize valueOfState, sampleCount, samples, currentSample, delegate, tap1, tap2, fearFaces, neutralFaces, currentImageIndex;
+@synthesize valueOfNeutralAndFearState, valueOfDot, sampleCount, samples, currentSample, delegate, tap1, tap2, fearFaces, neutralFaces, currentImageIndex, showDotOnNeutralFace;
 
 @synthesize image1, image2;
 
 
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [self initFaces];
+    
+    queue = dispatch_queue_create("cabin", NULL);
+    sampleCount = 0;
+    self.samples = [[NSMutableArray alloc] init];
+    
+    CGRect frame = self.view.frame;
+    
+   // NSLog(@"size: %f : %f",frame.size.width, frame.size.height);
+    
+    CGRect w1fame = self.wrapperView1.frame;
+    //w1fame.origin.y = 100;
+    w1fame.origin.y = 40;
+    self.wrapperView1.frame = w1fame;
+    
+    CGRect w2frame = self.wrapperView2.frame;
+    //w2frame.origin.y = frame.size.height - 220;
+    w2frame.origin.y = frame.size.height - 270;
+    self.wrapperView2.frame = w2frame;
+    
+    [self step_1_reset_display];
+    
+    self.tap1 = [[UITapGestureRecognizer alloc] initWithTarget: self action: @selector(doTap1)];
+    tap1.numberOfTapsRequired = 1;
+    
+    [self.wrapperView1 addGestureRecognizer: tap1];
+    
+    self.tap2 = [[UITapGestureRecognizer alloc] initWithTarget: self action: @selector(doTap2)];
+    tap2.numberOfTapsRequired = 1;
+    
+    [self.wrapperView2 addGestureRecognizer: tap2];
+    
+    [self disableTaps];
+    
+}
+
 - (void) initFaces {
     
     self.fearFaces = [NSArray arrayWithObjects: @"207Fcrop.jpg",
-                                 @"208Fcrop.jpg",
-                                 @"213Fcrop.jpg",
-                                 @"217Fcrop.jpg",
-                                 @"AF01AFS.jpg",
-                                 @"AF13AFS.jpg",
-                                 @"AF14AFS.jpg",
-                                 @"AF19AFS.jpg",
-                                 @"AF22AFS.jpg",
-                                 @"AF24AFS.jpg",
-                                 @"AF30AFS.jpg",
-                                 @"AF32AFS.jpg",
-                                 @"AM09AFS.jpg",
-                                 @"AM10AFS.jpg",
-                                 @"AM17AFS.jpg",
-                                 @"AM22AFS.jpg",
-                                 @"AM23AFS.jpg",
-                                 @"AM31AFS.jpg",
-                                 @"AM34AFS.jpg",
-                                 @"AM35AFS.jpg", nil];
+                      @"208Fcrop.jpg",
+                      @"213Fcrop.jpg",
+                      @"217Fcrop.jpg",
+                      @"AF01AFS.jpg",
+                      @"AF13AFS.jpg",
+                      @"AF14AFS.jpg",
+                      @"AF19AFS.jpg",
+                      @"AF22AFS.jpg",
+                      @"AF24AFS.jpg",
+                      @"AF30AFS.jpg",
+                      @"AF32AFS.jpg",
+                      @"AM09AFS.jpg",
+                      @"AM10AFS.jpg",
+                      @"AM17AFS.jpg",
+                      @"AM22AFS.jpg",
+                      @"AM23AFS.jpg",
+                      @"AM31AFS.jpg",
+                      @"AM34AFS.jpg",
+                      @"AM35AFS.jpg", nil];
     
     self.neutralFaces = [NSArray arrayWithObjects:@"207Ncrop.jpg",
                          @"208Ncrop.jpg",
@@ -70,54 +111,18 @@
                          @"AM34NES.jpg",
                          @"AM35NES.jpg", nil];
     
+    // if even - randomize dot between neutral and fear
+    // if odd - show dot on neutral face
+    int patientNumber = [[[DataService instance] patientNumber] intValue];
+    self.showDotOnNeutralFace = patientNumber % 2 != 0;
+    // NSLog(@"show dot on neutral: %d : %d", patientNumber, self.showDotOnNeutralFace);
+    
+    
     
     
 }
 
-
-
-
-
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    [self initFaces];
-
-    queue = dispatch_queue_create("cabin", NULL);
-    sampleCount = 0;
-    self.samples = [[NSMutableArray alloc] init];
-    
-    CGRect frame = self.view.frame;
-    
-   // NSLog(@"size: %f : %f",frame.size.width, frame.size.height);
-    
-    CGRect w1fame = self.wrapperView1.frame;
-    //w1fame.origin.y = 100;
-    w1fame.origin.y = 40;
-    self.wrapperView1.frame = w1fame;
-    
-    CGRect w2frame = self.wrapperView2.frame;
-    //w2frame.origin.y = frame.size.height - 220;
-    w2frame.origin.y = frame.size.height - 270;
-    self.wrapperView2.frame = w2frame;
-    
-    [self startSequence];
-    
-    self.tap1 = [[UITapGestureRecognizer alloc] initWithTarget: self action: @selector(doTap1)];
-    tap1.numberOfTapsRequired = 1;
-    
-    [self.wrapperView1 addGestureRecognizer: tap1];
-    
-    self.tap2 = [[UITapGestureRecognizer alloc] initWithTarget: self action: @selector(doTap2)];
-    tap2.numberOfTapsRequired = 1;
-    
-    [self.wrapperView2 addGestureRecognizer: tap2];
-    
-    [self disableTaps];
-    
-}
+#pragma mark - handle response
 
 - (void) doTap1 {
     
@@ -149,7 +154,11 @@
     sample.time = sampleStopTime - self.sampleStartTime;
     [samples addObject: sample];
     
-    if (selection == valueOfState) {
+    
+    NSLog(@"check answer: %d : %d",selection, valueOfDot);
+    
+    //if (selection == valueOfNeutralAndFearState) {
+    if (selection == valueOfDot) {
         feedback.text = @"Correct";
         feedback.textColor = [UIColor greenColor];
         sample.correct = YES;
@@ -168,15 +177,16 @@
         if(samples.count >= TEST_SAMPLE_SIZE) {
             [self.delegate testComplete: samples];
         } else {
-            [self startSequence];
+            [self step_1_reset_display];
         }
     });
     
     
 }
 
+#pragma mark - steps
 
-- (void) startSequence {
+- (void) step_1_reset_display {
     
     self.currentImageIndex = [self selectRandomImageIndex];
     
@@ -196,14 +206,14 @@
     
     sampleCount++;
     
-    self.valueOfState = arc4random() % 100 > 50 ? 1 : 0;
+    self.valueOfNeutralAndFearState = arc4random() % 100 > 50 ? 1 : 0;
     
 //    NSLog(@"random: %d : %d",valueOfState, sampleCount);
     
 
     
-    self.image1.image = valueOfState == 0 ? neutralImage : fearImage;
-    self.image2.image = valueOfState == 0 ? fearImage : neutralImage;
+    self.image1.image = valueOfNeutralAndFearState == 0 ? neutralImage : fearImage;
+    self.image2.image = valueOfNeutralAndFearState == 0 ? fearImage : neutralImage;
     
     
     //self.sampleStartTime = [NSDate timeIntervalSinceReferenceDate];
@@ -211,7 +221,7 @@
     double delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self sequence2];
+        [self step_2_show_images];
     });
     
     
@@ -227,47 +237,83 @@
     
 }
 
+#pragma mark - show images
 
-- (void) sequence2 {
+- (void) step_2_show_images {
 
     //[self hideCross];
     //[self showWords];
     [self showImages];
 
     
-    //double delayInSeconds = 1.0;
+    //double delayInSeconds = 2.0;
     double delayInSeconds = 0.1;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-       [self sequence3];
+       [self step_3_show_dots];
     });
     
 }
 
-- (void) sequence3 {
+#pragma mark - show dots
+
+- (void) step_3_show_dots {
     
    // [self hideWords];
     [self hideImages];
     
     self.sampleStartTime = [NSDate timeIntervalSinceReferenceDate];
     
-    if (valueOfState == 0) {
-        self.dotButton1.hidden = NO;
-    } else {
-        self.dotButton2.hidden = NO;
-    }
+    [self showDot];
     [self enableTaps];
     
     double delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self sequence4];
+        [self step_4_hide_dots];
     });
 
     
 }
 
-- (void) sequence4 {
+- (void) showDot {
+    
+    if (showDotOnNeutralFace) {
+        [self do_showDotOnNeutralFace];
+    } else {
+        [self do_showDotOnRandomFace];
+    }
+    
+    
+
+}
+
+- (void) do_showDotOnNeutralFace {
+    
+    self.valueOfDot = valueOfNeutralAndFearState;
+    if (valueOfNeutralAndFearState == 0) {
+        self.dotButton1.hidden = NO;
+    } else {
+        self.dotButton2.hidden = NO;
+    }
+    
+}
+
+- (void) do_showDotOnRandomFace {
+    
+    self.valueOfDot = arc4random() % 100 > 50 ? 1 : 0;
+    if (valueOfDot == 0) {
+        self.dotButton1.hidden = NO;
+    } else {
+        self.dotButton2.hidden = NO;
+    }
+    
+}
+
+
+#pragma mark - hide dots
+
+- (void) step_4_hide_dots {
     
     [self hideDotButtons];
     
@@ -275,6 +321,8 @@
     
     
 }
+
+#pragma mark - show / hide
 
 
 - (void) showCross {

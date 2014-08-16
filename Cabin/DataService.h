@@ -23,4 +23,8 @@
 
 - (void) writePatientNumber: (NSNumber *) pNumber;
 
+- (int) countOfTestsToday;
+
+- (BOOL) canTakeTest;
+
 @end

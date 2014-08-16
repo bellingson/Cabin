@@ -43,6 +43,8 @@
         ctrl.dataService = self.dataService;
         
         [self presentViewController: ctrl animated: YES completion: nil];        
+    } else {
+        NSLog(@"patient number is: %@",self.dataService.patientNumber);
     }
 
     
@@ -51,14 +53,27 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
+    //NSLog(@"prep: %@ : %d",segue.identifier,[self.dataService canTakeTest]);
+    
     if ([segue.identifier isEqualToString: @"startTest"]) {
+        
         TestViewController *child = (TestViewController *)[segue destinationViewController];
         child.delegate = self;
     }
-    
-
-    
 }
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    
+    if ([identifier isEqualToString: @"startTest"]) {
+            return [self.dataService canTakeTest];
+    }
+    
+    return YES;
+}
+
+
+
+
 
 - (void)testComplete:(NSArray *)samples {
 
@@ -78,7 +93,10 @@
 }
 
 - (void) testAgain {
- 
+    
+    if ([self.dataService canTakeTest] == NO)
+        return;
+    
     [self dismissViewControllerAnimated: NO completion: ^{
         [self performSegueWithIdentifier: @"startTest" sender: self];
     }];

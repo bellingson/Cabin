@@ -46,10 +46,12 @@
 @property (strong, nonatomic) NSArray *neutralFaces;
 @property int currentImageIndex;
 
-@property int valueOfState;
+@property int valueOfNeutralAndFearState;
+@property int valueOfDot;
 @property int sampleCount;
 
 @property double sampleStartTime;
+@property BOOL showDotOnNeutralFace;
 
 
 

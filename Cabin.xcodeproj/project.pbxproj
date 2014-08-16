@@ -27,10 +27,12 @@
 		B54AF53218BED1A6003A4D2F /* TestCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B54AF53118BED1A6003A4D2F /* TestCompleteViewController.m */; };
 		B54AF53618BED8BF003A4D2F /* TestResult.m in Sources */ = {isa = PBXBuildFile; fileRef = B54AF53518BED8BF003A4D2F /* TestResult.m */; };
 		B54AF53918BEED49003A4D2F /* NSDictionary+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = B54AF53818BEED49003A4D2F /* NSDictionary+JSON.m */; };
-		B54AF53C18BEEEB4003A4D2F /* StringHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B54AF53B18BEEEB4003A4D2F /* StringHelper.m */; };
 		B54AF53F18BEF38C003A4D2F /* ResultListController.m in Sources */ = {isa = PBXBuildFile; fileRef = B54AF53E18BEF38C003A4D2F /* ResultListController.m */; };
 		B54AF54218BF040C003A4D2F /* DataService.m in Sources */ = {isa = PBXBuildFile; fileRef = B54AF54118BF040C003A4D2F /* DataService.m */; };
 		B55F13921901F78C00F6FA0D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B55F13911901F78C00F6FA0D /* SettingsViewController.m */; };
+		B56243A9199FC9C7007E5924 /* DateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B56243A8199FC9C7007E5924 /* DateHelper.m */; };
+		B56243AC199FC9DD007E5924 /* StringHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B56243AB199FC9DD007E5924 /* StringHelper.m */; };
+		B56243AF199FEBDE007E5924 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = B56243AE199FEBDE007E5924 /* Base64.m */; };
 		B5834E8D18D91AD700E57093 /* 207Fcrop.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B5834E6518D91AD700E57093 /* 207Fcrop.jpg */; };
 		B5834E8E18D91AD700E57093 /* 207Ncrop.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B5834E6618D91AD700E57093 /* 207Ncrop.jpg */; };
 		B5834E8F18D91AD700E57093 /* 208Fcrop.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B5834E6718D91AD700E57093 /* 208Fcrop.jpg */; };
@@ -117,14 +119,18 @@
 		B54AF53518BED8BF003A4D2F /* TestResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestResult.m; sourceTree = "<group>"; };
 		B54AF53718BEED49003A4D2F /* NSDictionary+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+JSON.h"; sourceTree = "<group>"; };
 		B54AF53818BEED49003A4D2F /* NSDictionary+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+JSON.m"; sourceTree = "<group>"; };
-		B54AF53A18BEEEB4003A4D2F /* StringHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringHelper.h; sourceTree = "<group>"; };
-		B54AF53B18BEEEB4003A4D2F /* StringHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringHelper.m; sourceTree = "<group>"; };
 		B54AF53D18BEF38C003A4D2F /* ResultListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultListController.h; sourceTree = "<group>"; };
 		B54AF53E18BEF38C003A4D2F /* ResultListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultListController.m; sourceTree = "<group>"; };
 		B54AF54018BF040C003A4D2F /* DataService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataService.h; sourceTree = "<group>"; };
 		B54AF54118BF040C003A4D2F /* DataService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataService.m; sourceTree = "<group>"; };
 		B55F13901901F78C00F6FA0D /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		B55F13911901F78C00F6FA0D /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		B56243A7199FC9C7007E5924 /* DateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateHelper.h; sourceTree = "<group>"; };
+		B56243A8199FC9C7007E5924 /* DateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateHelper.m; sourceTree = "<group>"; };
+		B56243AA199FC9DD007E5924 /* StringHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringHelper.h; sourceTree = "<group>"; };
+		B56243AB199FC9DD007E5924 /* StringHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringHelper.m; sourceTree = "<group>"; };
+		B56243AD199FEBDE007E5924 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
+		B56243AE199FEBDE007E5924 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
 		B5834E6518D91AD700E57093 /* 207Fcrop.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 207Fcrop.jpg; sourceTree = "<group>"; };
 		B5834E6618D91AD700E57093 /* 207Ncrop.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 207Ncrop.jpg; sourceTree = "<group>"; };
 		B5834E6718D91AD700E57093 /* 208Fcrop.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 208Fcrop.jpg; sourceTree = "<group>"; };
@@ -227,6 +233,7 @@
 		B530141E18BEA8780058779B /* Cabin */ = {
 			isa = PBXGroup;
 			children = (
+				B56243A6199FC9C7007E5924 /* Helper */,
 				B54AF52718BEB503003A4D2F /* images */,
 				B530142718BEA8780058779B /* AppDelegate.h */,
 				B530142818BEA8780058779B /* AppDelegate.m */,
@@ -249,8 +256,6 @@
 				B54AF53518BED8BF003A4D2F /* TestResult.m */,
 				B54AF53718BEED49003A4D2F /* NSDictionary+JSON.h */,
 				B54AF53818BEED49003A4D2F /* NSDictionary+JSON.m */,
-				B54AF53A18BEEEB4003A4D2F /* StringHelper.h */,
-				B54AF53B18BEEEB4003A4D2F /* StringHelper.m */,
 				B54AF52A18BEB6EC003A4D2F /* AboutViewController.h */,
 				B54AF52B18BEB6EC003A4D2F /* AboutViewController.m */,
 				B530141F18BEA8780058779B /* Supporting Files */,
@@ -297,6 +302,19 @@
 				B54AF52818BEB503003A4D2F /* btn_white_dot.png */,
 			);
 			path = images;
+			sourceTree = "<group>";
+		};
+		B56243A6199FC9C7007E5924 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				B56243AD199FEBDE007E5924 /* Base64.h */,
+				B56243AE199FEBDE007E5924 /* Base64.m */,
+				B56243AA199FC9DD007E5924 /* StringHelper.h */,
+				B56243AB199FC9DD007E5924 /* StringHelper.m */,
+				B56243A7199FC9C7007E5924 /* DateHelper.h */,
+				B56243A8199FC9C7007E5924 /* DateHelper.m */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		B5834E6418D91AD700E57093 /* faces */ = {
@@ -485,17 +503,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B54AF53C18BEEEB4003A4D2F /* StringHelper.m in Sources */,
 				B530142F18BEA8780058779B /* MainViewController.m in Sources */,
+				B56243AF199FEBDE007E5924 /* Base64.m in Sources */,
 				B54AF53918BEED49003A4D2F /* NSDictionary+JSON.m in Sources */,
 				B54AF54218BF040C003A4D2F /* DataService.m in Sources */,
 				B54AF53218BED1A6003A4D2F /* TestCompleteViewController.m in Sources */,
+				B56243AC199FC9DD007E5924 /* StringHelper.m in Sources */,
 				B54AF52C18BEB6EC003A4D2F /* AboutViewController.m in Sources */,
 				B530142918BEA8780058779B /* AppDelegate.m in Sources */,
 				B54AF52F18BECCB0003A4D2F /* TestSample.m in Sources */,
 				B54AF53F18BEF38C003A4D2F /* ResultListController.m in Sources */,
 				B5EE3C9418BEB01A00D5D60A /* TestViewController.m in Sources */,
 				B54AF53618BED8BF003A4D2F /* TestResult.m in Sources */,
+				B56243A9199FC9C7007E5924 /* DateHelper.m in Sources */,
 				B530142518BEA8780058779B /* main.m in Sources */,
 				B55F13921901F78C00F6FA0D /* SettingsViewController.m in Sources */,
 			);
