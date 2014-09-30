@@ -165,6 +165,17 @@
     return UIInterfaceOrientationMaskPortrait;
 }
 
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    
+    //NSLog(@"will rotate: %d",toInterfaceOrientation);
+    
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    
+    //NSLog(@"did rotate: %d",fromInterfaceOrientation);
+    
+}
 
 
 

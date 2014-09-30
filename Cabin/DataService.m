@@ -83,8 +83,9 @@ static DataService *svc;
     
     NSHTTPURLResponse *response;
     NSError *err;
-    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
-    NSString *responseString = [[NSString alloc] initWithData: responseData encoding: NSUTF8StringEncoding];
+    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
+    //NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
+    //NSString *responseString = [[NSString alloc] initWithData: responseData encoding: NSUTF8StringEncoding];
    // NSLog(@"responseData: %@ : %@ : %d", responseString, err, response.statusCode);
 
 
@@ -99,7 +100,7 @@ static DataService *svc;
 - (void) addAuthorization: (NSMutableURLRequest *) request {
     
     NSString *authStr = [NSString stringWithFormat:@"%@:%@", @"psychdata", @"sycSa3mgba*j=Ti6jyOYMfkWQP3u4JGX" ];
-    NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
+
     
     NSString *encodedLoginData = [Base64 encode:[authStr dataUsingEncoding:NSUTF8StringEncoding]];
     
@@ -219,7 +220,7 @@ static DataService *svc;
         
         NSString *msg = [NSString stringWithFormat: @"You may only take %d tests per day",MAX_TEST_PER_DAY];
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Max Tests Completed" message: msg delegate: nil cancelButtonTitle: @"OK" otherButtonTitles: nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Tests Complete" message: msg delegate: nil cancelButtonTitle: @"OK" otherButtonTitles: nil];
         [alert show];
         
         return NO;

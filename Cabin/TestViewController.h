@@ -20,6 +20,8 @@
 
 @property (strong, nonatomic) id<TestViewDelegate> delegate;
 
+@property (strong, nonatomic) IBOutlet UIView *wrapperView;
+
 @property (strong, nonatomic) IBOutlet UILabel *word1;
 
 @property (strong, nonatomic) IBOutlet UILabel *word2;

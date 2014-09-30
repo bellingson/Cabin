@@ -10,6 +10,7 @@
 
 @interface AboutViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UILabel *versionLabel;
 
 - (IBAction)doneButtonTouched:(id)sender;
 

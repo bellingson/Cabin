@@ -80,7 +80,11 @@
     UIDevice *device = [UIDevice currentDevice];
     NSString *appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey: kCFBundleVersionKey];
     
+    // odd shows dot on neutral face , even mixes
+    NSString *showDotOnNeutralFace = ([dataService.patientNumber intValue] % 2 != 0) ? @"true" : @"false";
+    
     return [NSDictionary dictionaryWithObjectsAndKeys:  dataService.patientNumber, @"patient_number",
+                                                        showDotOnNeutralFace, @"show_dot_on_neutral_face",
                                                         appVersion, @"app_version",
                                                         [device name], @"device_name",
                                                         [device systemVersion], @"ios_version",

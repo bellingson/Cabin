@@ -14,6 +14,18 @@
 
 @implementation AboutViewController
 
+- (void)viewDidLoad {
+    
+    [super viewDidLoad];
+    
+    NSString *appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey: kCFBundleVersionKey];
+    
+    self.versionLabel.text = [NSString stringWithFormat:@"Version: %@",appVersion];
+    
+    
+    
+}
+
 
 
 - (IBAction)doneButtonTouched:(id)sender {

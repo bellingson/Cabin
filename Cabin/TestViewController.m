@@ -13,7 +13,7 @@
 
 #include <stdlib.h>
 
-#define TEST_SAMPLE_SIZE 1
+#define TEST_SAMPLE_SIZE 10
 
 @interface TestViewController ()
 
@@ -37,19 +37,26 @@
     sampleCount = 0;
     self.samples = [[NSMutableArray alloc] init];
     
-    CGRect frame = self.view.frame;
+/*
+    CGRect frame = self.wrapperView.frame;
+    frame.size.height = 480;
+    self.wrapperView.frame = frame;
     
    // NSLog(@"size: %f : %f",frame.size.width, frame.size.height);
     
     CGRect w1fame = self.wrapperView1.frame;
     //w1fame.origin.y = 100;
-    w1fame.origin.y = 40;
+    w1fame.origin.y = 20;
     self.wrapperView1.frame = w1fame;
     
     CGRect w2frame = self.wrapperView2.frame;
     //w2frame.origin.y = frame.size.height - 220;
-    w2frame.origin.y = frame.size.height - 270;
+    //w2frame.origin.y = frame.size.height - 270;
+    w2frame.origin.y = frame.size.height - 220;
     self.wrapperView2.frame = w2frame;
+    
+    NSLog(@"w1: %f : %f",w2frame.origin.x, w2frame.origin.y);
+*/
     
     [self step_1_reset_display];
     
@@ -381,6 +388,22 @@
     self.tap2.enabled = NO;
     
 }
+
+
+- (BOOL)shouldAutorotate {
+   // NSLog(@"should autorotate");
+    return NO;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskLandscapeLeft;
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
+
 
 
 @end

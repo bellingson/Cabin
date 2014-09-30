@@ -33,6 +33,7 @@
 		B56243A9199FC9C7007E5924 /* DateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B56243A8199FC9C7007E5924 /* DateHelper.m */; };
 		B56243AC199FC9DD007E5924 /* StringHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B56243AB199FC9DD007E5924 /* StringHelper.m */; };
 		B56243AF199FEBDE007E5924 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = B56243AE199FEBDE007E5924 /* Base64.m */; };
+		B56243B1199FF33B007E5924 /* cabin_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B56243B0199FF33B007E5924 /* cabin_logo.png */; };
 		B5834E8D18D91AD700E57093 /* 207Fcrop.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B5834E6518D91AD700E57093 /* 207Fcrop.jpg */; };
 		B5834E8E18D91AD700E57093 /* 207Ncrop.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B5834E6618D91AD700E57093 /* 207Ncrop.jpg */; };
 		B5834E8F18D91AD700E57093 /* 208Fcrop.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B5834E6718D91AD700E57093 /* 208Fcrop.jpg */; };
@@ -131,6 +132,7 @@
 		B56243AB199FC9DD007E5924 /* StringHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringHelper.m; sourceTree = "<group>"; };
 		B56243AD199FEBDE007E5924 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		B56243AE199FEBDE007E5924 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
+		B56243B0199FF33B007E5924 /* cabin_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cabin_logo.png; sourceTree = "<group>"; };
 		B5834E6518D91AD700E57093 /* 207Fcrop.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 207Fcrop.jpg; sourceTree = "<group>"; };
 		B5834E6618D91AD700E57093 /* 207Ncrop.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 207Ncrop.jpg; sourceTree = "<group>"; };
 		B5834E6718D91AD700E57093 /* 208Fcrop.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 208Fcrop.jpg; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 		B54AF52718BEB503003A4D2F /* images */ = {
 			isa = PBXGroup;
 			children = (
+				B56243B0199FF33B007E5924 /* cabin_logo.png */,
 				B5834EB518D92BEC00E57093 /* cross.png */,
 				B5834E6418D91AD700E57093 /* faces */,
 				B54AF52818BEB503003A4D2F /* btn_white_dot.png */,
@@ -408,7 +411,7 @@
 		B530140D18BEA8780058779B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Northstar New Media";
 				TargetAttributes = {
 					B530143518BEA8790058779B = {
@@ -440,6 +443,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B56243B1199FF33B007E5924 /* cabin_logo.png in Resources */,
 				B5834EB618D92BEC00E57093 /* cross.png in Resources */,
 				B530143118BEA8780058779B /* Images.xcassets in Resources */,
 				B5834EA618D91AD700E57093 /* AM09NES.jpg in Resources */,
@@ -571,7 +575,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -610,7 +613,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -658,6 +660,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cabin/Cabin-Prefix.pch";
 				INFOPLIST_FILE = "Cabin/Cabin-Info.plist";
@@ -670,7 +673,6 @@
 		B530144B18BEA8790058779B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Cabin.app/Cabin";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -693,7 +695,6 @@
 		B530144C18BEA8790058779B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Cabin.app/Cabin";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
