@@ -13,6 +13,7 @@
 @property int ordinal;
 @property BOOL correct;
 @property double time;
+@property BOOL show_dot_on_neutral_face;
 
 - (NSDictionary *) asDictionary;
 

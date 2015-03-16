@@ -84,10 +84,7 @@ static DataService *svc;
     NSHTTPURLResponse *response;
     NSError *err;
     [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
-    //NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
-    //NSString *responseString = [[NSString alloc] initWithData: responseData encoding: NSUTF8StringEncoding];
-   // NSLog(@"responseData: %@ : %@ : %d", responseString, err, response.statusCode);
-
+    
 
     if (err == nil && response.statusCode == 200) {
         [self handleUploadComplete: result];

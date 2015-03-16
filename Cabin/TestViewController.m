@@ -14,7 +14,7 @@
 #include <stdlib.h>
 
 #define TEST_SAMPLE_SIZE 10
-//#define TEST_SAMPLE_SIZE 200
+#define TEST_SAMPLE_SIZE 200
 
 @interface TestViewController ()
 
@@ -123,7 +123,7 @@
     // if odd - show dot on neutral face
     int patientNumber = [[[DataService instance] patientNumber] intValue];
     self.showDotOnNeutralFace = patientNumber % 2 != 0;
-    // NSLog(@"show dot on neutral: %d : %d", patientNumber, self.showDotOnNeutralFace);
+    // NSLog(@"show dot on neutral: %d : %d", patientNumber, self.  );
     
     
     
@@ -160,10 +160,11 @@
     TestSample *sample = [[TestSample alloc] init];
     sample.ordinal = (int) samples.count;
     sample.time = sampleStopTime - self.sampleStartTime;
+    sample.show_dot_on_neutral_face = self.valueOfNeutralAndFearState == valueOfDot;
     [samples addObject: sample];
     
     
-    NSLog(@"check answer: %d : %d",selection, valueOfDot);
+    //NSLog(@"check answer: %d : %d : %d : %d",selection, valueOfDot, valueOfNeutralAndFearState, sample.show_dot_on_neutral_face);
     
     //if (selection == valueOfNeutralAndFearState) {
     if (selection == valueOfDot) {
@@ -216,9 +217,7 @@
     
     self.valueOfNeutralAndFearState = arc4random() % 100 > 50 ? 1 : 0;
     
-//    NSLog(@"random: %d : %d",valueOfState, sampleCount);
-    
-
+   // NSLog(@"random: %d : %d",valueOfNeutralAndFearState, sampleCount);
     
     self.image1.image = valueOfNeutralAndFearState == 0 ? neutralImage : fearImage;
     self.image2.image = valueOfNeutralAndFearState == 0 ? fearImage : neutralImage;
